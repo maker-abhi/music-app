@@ -1,13 +1,14 @@
 package `in`.zyla.musicapp
 
+import android.databinding.DataBindingUtil
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.item_songs_group.view.*
+import `in`.zyla.musicapp.databinding.ItemSongsGroupBinding
+
 
 class GroupsAdapter : RecyclerView.Adapter<GroupsAdapter.GroupsViewHolder>() {
 
@@ -32,21 +33,19 @@ class GroupsAdapter : RecyclerView.Adapter<GroupsAdapter.GroupsViewHolder>() {
         holder.bind(itemsList[position])
     }
 
-    class GroupsViewHolder(private val parentView: View) : RecyclerView.ViewHolder(parentView), LayoutContainer {
+    class GroupsViewHolder(parentView: View) : RecyclerView.ViewHolder(parentView) {
 
-        override val containerView: View?
-            get() = parentView
-
+        private var songsGroupBinding: ItemSongsGroupBinding? = DataBindingUtil.bind(parentView)
         private val songsAdapter: SongsAdapter = SongsAdapter()
 
         init {
-            parentView.rv_songs.layoutManager =
+            songsGroupBinding?.rvSongs?.layoutManager =
                 GridLayoutManager(parentView.context, 3, LinearLayoutManager.HORIZONTAL, false)
-            parentView.rv_songs.adapter = songsAdapter
+            songsGroupBinding?.rvSongs?.adapter = songsAdapter
         }
 
         fun bind(songsGroup: SongsGroup) {
-            parentView.group_name.text = songsGroup.groupName
+            songsGroupBinding?.setGroupName(songsGroup.groupName)
             songsAdapter.itemsList = songsGroup.songs
         }
     }

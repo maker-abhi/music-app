@@ -3,9 +3,11 @@ package `in`.zyla.musicapp
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
+import `in`.zyla.musicapp.databinding.ItemSongBinding
+import android.databinding.DataBindingUtil
+import android.view.View
 
-class SongsAdapter : RecyclerView.Adapter<SongsAdapter.TextAnswersViewHolder>() {
+class SongsAdapter : RecyclerView.Adapter<SongsAdapter.SongViewHolder>() {
 
     var itemsList: List<String> = mutableListOf()
         set(items) {
@@ -16,22 +18,23 @@ class SongsAdapter : RecyclerView.Adapter<SongsAdapter.TextAnswersViewHolder>() 
     override fun getItemCount() = itemsList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        TextAnswersViewHolder(
+        SongViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.item_song,
                 parent,
                 false
-            ) as TextView
+            )
         )
 
-    override fun onBindViewHolder(holder: TextAnswersViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SongViewHolder, position: Int) {
         holder.bind(itemsList[position])
     }
 
-    class TextAnswersViewHolder(private val textView: TextView) : RecyclerView.ViewHolder(textView) {
+    class SongViewHolder(parentView: View) : RecyclerView.ViewHolder(parentView) {
+        private var songsGroupBinding: ItemSongBinding? = DataBindingUtil.bind(parentView)
 
-        fun bind(textAnswer: String) {
-            textView.text = textAnswer
+        fun bind(songName: String) {
+            songsGroupBinding?.songName = songName
         }
     }
 }
