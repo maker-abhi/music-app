@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private var dataByAlbum = HashMap<String, SongsGroup>()
 
     private val groupByList = listOf("Artist", "Album")
-    private val songsPerPageList = listOf(2, 3, 4)
+    private val songsPerPageList = listOf(1, 2, 3, 4, 5, 6)
 
     private lateinit var groupsAdapter: GroupsAdapter
     private lateinit var binding: ActivityMainBinding
