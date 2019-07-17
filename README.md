@@ -15,3 +15,9 @@ Something about the solution itself:
 4. sample_music_data.csv file is placed in the assets folder which gets loaded when the app starts
 5. The data from csv is parsed into two HashMaps based on grouping Album/Artist.
    Here key is the album/artist name and values are the list of songs.
+
+
+Further things I would have liked to do:
+1. Save the csv data in a local storage
+2. Move the parsed data into a ViewModel so that we don't have to parse every time the screen loads
+3. Move the logic to parse data into a separate class and write some tests for it.
