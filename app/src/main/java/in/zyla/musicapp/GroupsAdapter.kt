@@ -12,6 +12,12 @@ import `in`.zyla.musicapp.databinding.ItemSongsGroupBinding
 
 class GroupsAdapter : RecyclerView.Adapter<GroupsAdapter.GroupsViewHolder>() {
 
+    var spanCount: Int = 3
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
     var itemsList: List<SongsGroup> = mutableListOf()
         set(items) {
             field = items
@@ -26,25 +32,28 @@ class GroupsAdapter : RecyclerView.Adapter<GroupsAdapter.GroupsViewHolder>() {
                 R.layout.item_songs_group,
                 parent,
                 false
-            )
+            ), spanCount
         )
 
     override fun onBindViewHolder(holder: GroupsViewHolder, position: Int) {
-        holder.bind(itemsList[position])
+        holder.bind(itemsList[position], spanCount)
     }
 
-    class GroupsViewHolder(parentView: View) : RecyclerView.ViewHolder(parentView) {
+    class GroupsViewHolder(parentView: View, spanCount: Int) : RecyclerView.ViewHolder(parentView) {
 
         private var songsGroupBinding: ItemSongsGroupBinding? = DataBindingUtil.bind(parentView)
         private val songsAdapter: SongsAdapter = SongsAdapter()
+        private val layoutManager =
+            GridLayoutManager(parentView.context, spanCount, LinearLayoutManager.HORIZONTAL, false)
+
 
         init {
-            songsGroupBinding?.rvSongs?.layoutManager =
-                GridLayoutManager(parentView.context, 3, LinearLayoutManager.HORIZONTAL, false)
+            songsGroupBinding?.rvSongs?.layoutManager = layoutManager
             songsGroupBinding?.rvSongs?.adapter = songsAdapter
         }
 
-        fun bind(songsGroup: SongsGroup) {
+        fun bind(songsGroup: SongsGroup, spanCount: Int) {
+            layoutManager.spanCount = spanCount
             songsGroupBinding?.setGroupName(songsGroup.groupName)
             songsAdapter.itemsList = songsGroup.songs
         }

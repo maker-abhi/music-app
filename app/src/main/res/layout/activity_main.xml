@@ -35,7 +35,13 @@
             android:id="@+id/rv_groups"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:background="@color/grey"
+            android:clipToPadding="false"
             android:layout_weight="1"
+            android:paddingTop="8dp"
+            android:paddingBottom="20dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             tools:listitem="@layout/item_songs_group" />
 
     </LinearLayout>

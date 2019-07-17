@@ -30,7 +30,7 @@
             android:id="@+id/rv_songs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            tools:layoutManager="android.support.v7.widget.GridLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/group_name"
             tools:itemCount="3"
             tools:listitem="@layout/item_song" />
